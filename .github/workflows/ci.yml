@@ -1,0 +1,22 @@
+name: CI Citas Hospital Valdizan
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  verificacion-calidad:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar codigo del repositorio
+        uses: actions/checkout@v4
+
+      - name: Comprobar existencia del archivo index.html
+        run: test -f index.html
+
+      - name: Validar regla institucional
+        run: grep -qi "Valdizan" index.html
